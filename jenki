@@ -1,0 +1,33 @@
+pipeline{
+agent any
+  tools{
+  maven 'M3'
+  }
+  stages{
+    stage('SCM'){
+      steps{
+        git 'https://github.com/nishanthcowdhary/sample.git'
+      }
+    }
+    stage('Build'){
+      steps{
+        sh "mvn clean package"
+      }
+    }
+    stage('Junit'){
+        steps{
+          junit '*/target/surefire-reports/.xml'
+        }
+    }
+    stage('sonarqube'){
+      steps {
+       script {
+       def scannerHome = tool 'sonarqube';
+           withSonarQubeEnv("sonar") {
+           sh "${tool("sonarqube-scanner")}/bin/sonar-scanner"
+               }
+           }
+       }
+    }
+  }
+}
