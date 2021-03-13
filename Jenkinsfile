@@ -11,8 +11,13 @@ pipeline{
 	  maven 'M3'
 	 }
 	 steps{
-	 sh 'mvn clean package'
+	 sh 'mvn clean install package'
 	 }
+	}
+     stage('Unit Test Result') {
+       steps {
+	     junit '*/target/surefire-reports/TEST-.xml'
+	   }
 	}
   }
 }
