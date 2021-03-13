@@ -24,7 +24,7 @@ agent any
        script {
        def scannerHome = tool 'sonarqube';
            withSonarQubeEnv("sonar") {
-           sh "${tool("sonarqube-scanner")}/bin/sonar-scanner"
+           sh "${tool("sonarqube")}/bin/sonar-scanner"
                }
            }
        }
