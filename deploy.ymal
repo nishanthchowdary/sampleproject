@@ -1,0 +1,6 @@
+---
+- hosts: webservers
+  become: true
+  tasks:
+   - name: Deploy War File
+     copy: src=**/target/*.jar dest=/root/apache-/tomcat-9.0.44/webapps/
