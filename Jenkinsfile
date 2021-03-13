@@ -24,8 +24,9 @@ pipeline{
         def scannerHome = tool 'sonar';
     }
     steps {
-      withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner"
+      withSonarQubeEnv(credentialsId: '1234') {
+    // some block
+}
         }
         timeout(time: 10, unit: 'MINUTES') {
           waitForQualityGate abortPipeline: true
