@@ -26,7 +26,6 @@ pipeline{
     steps {
       withSonarQubeEnv(credentialsId: '1234') {
     // some block
-}
         }
         timeout(time: 10, unit: 'MINUTES') {
           waitForQualityGate abortPipeline: true
