@@ -19,5 +19,18 @@ pipeline{
           junit '**/target/surefire-reports/*.xml'
         }
     }
+    stage('Sonarqube') {
+    environment {
+        def scannerHome = tool 'sonar';
+    }
+    steps {
+      withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
+        }
+    }
+}
   }
 }
