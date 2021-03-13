@@ -26,6 +26,9 @@ pipeline{
     steps {
       withSonarQubeEnv('sonar') {
             sh "${scannerHome}/bin/sonar-scanner"
+	      withCredentials([string(credentialsId: 'sonar-scanner', variable: 'sonarqube')]) {
+    // some block
+}
         }
         timeout(time: 10, unit: 'MINUTES') {
           waitForQualityGate abortPipeline: true
