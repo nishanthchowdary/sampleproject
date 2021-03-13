@@ -20,17 +20,14 @@ pipeline{
         }
     }
     stage('Sonarqube') {
-    environment {
-        def scannerHome = tool 'sonar';
-    }
-    steps {
+      steps {
       withSonarQubeEnv(credentialsId: '1234') {
     // some block
         }
         timeout(time: 10, unit: 'MINUTES') {
           waitForQualityGate abortPipeline: true
         }
-    }
-}
+      }
+      }
   }
 }
