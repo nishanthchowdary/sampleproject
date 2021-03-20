@@ -9,11 +9,11 @@ pipeline{
     }
   stage('build'){
     steps{
-    tool {
+      tools {
     maven 'Maven
      // build the war file
-    }
-     sh 'clean install package'
+       }
+     sh 'mvn clean install package'
     }
   }  
    }
