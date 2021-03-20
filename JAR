@@ -1,20 +1,23 @@
 pipeline{
- agent any
-   stages{
-    stage{
+agent any
+  tools{
+  maven 'M3'
+  }
+  stages{
+    stage('SCM'){
       steps{
-      // Get the some coad from the git clone
-         git 'https://github.com/nishanthchowdary/sampleproject.git'
+        git 'https://github.com/nishanthchowdary/sampleproject.git'
       }
     }
-    stage('build'){
+    stage('Build'){
       steps{
-        tools {
-    maven 'Maven'
-     // build the war file
-        }
-       sh 'mvn clean install package'
+        sh "mvn clean package"
       }
-     }  
+    }
+    stage('Junit'){
+        steps{
+          junit '**/target/surefire-reports/*.xml'
+        }
+    }
    }
 }
