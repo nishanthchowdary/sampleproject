@@ -2,19 +2,19 @@ pipeline{
  agent any
    stages{
     stage{
-      stepes{
+      steps{
       // Get the some coad from the git clone
          git 'https://github.com/nishanthchowdary/sampleproject.git'
       }
     }
-  stage('build'){
-    steps{
-      tools {
+    stage('build'){
+      steps{
+        tools {
     maven 'Maven'
      // build the war file
-       }
-     sh 'mvn clean install package'
-    }
-  }  
+        }
+       sh 'mvn clean install package'
+      }
+     }  
    }
 }
