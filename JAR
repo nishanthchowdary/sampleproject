@@ -1,0 +1,20 @@
+pipeline{
+ agent any
+   stages{
+    stage{
+      stepes{
+      // Get the some coad from the git clone
+         git 'https://github.com/nishanthchowdary/sampleproject.git'
+      }
+    }
+  stage('build'){
+    steps{
+    tool {
+    maven 'Maven
+     // build the war file
+    }
+     sh 'clean install package'
+    }
+  }  
+   }
+}
