@@ -10,7 +10,7 @@ pipeline{
   stage('build'){
     steps{
       tools {
-    maven 'Maven
+    maven 'Maven'
      // build the war file
        }
      sh 'mvn clean install package'
