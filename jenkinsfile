@@ -1,0 +1,11 @@
+pipeline{
+ agent any
+   stages{
+     stage(" check out the source coad") {
+       steps{
+          echo "cloing the source coad form git hube"
+        git 'https://github.com/nishanthchowdary/sampleproject.git'
+      }
+     }
+   }
+}
