@@ -1,6 +1,27 @@
 ---
-- hosts: tomcat
+- hosts: webservers
   become: true
   tasks:
-   - name: Deploy War File
+  - name: Stop Tomcat
+    service: name=tomcat state=stopped
+  - name: Check that war file exist
+    stat:
+      path: /usr/share/tomcat/webapps/gameoflife.war
+    register: stat_result
+
+  - name: Delete the war file, if it exist already
+    file:
+      path: /usr/share/tomcat/webapps/gameoflife.war
+      state: absent
+    when: stat_result.stat.exists == True
+  - name: Check that GAMEOFLIFE dir exist
+    stat:
+      path: /usr/share/tomcat/webapps/gameoflife
+    register: stat_result
+  - name: Delete the GAMEOFLIFE dir, if it exist already
+    file:
+      path: /usr/share/tomcat/webapps/gameoflife
+      state: absent
+    when: stat_result.stat.exists == True
+  - name: Deploy War File
      copy: src=**/target/*.jar dest=/root/apache-/tomcat-9.0.44/webapps/
