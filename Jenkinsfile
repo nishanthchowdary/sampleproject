@@ -8,7 +8,7 @@ pipeline{
     }
     stage('build'){
 	 tools{
-	  maven 'Maven'
+	  maven 'maven'
 	 }
 	 steps{
 	 sh 'mvn clean install package'
@@ -21,12 +21,12 @@ pipeline{
     }
     stage('Sonarqube') {
     environment {
-        def scannerHome = tool 'sonarqube';
+        def scannerHome = tool 'sonarQube';
     }
     steps {
-      withSonarQubeEnv('sonar') {
+      withSonarQubeEnv('sonarqube') {
             sh "${scannerHome}/bin/sonar-scanner"
-	      withCredentials([string(credentialsId: 'sonar-scanner', variable: 'sonarqube')]) {
+	      withCredentials([string(credentialsId: 'sonar', variable: 'sonarQube')]) {
     // some block
 }
         }
